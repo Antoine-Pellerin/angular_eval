@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Product } from '../model/product';
 import { CustomerService } from '../services/customer.service';
 import { ProductService } from '../services/product.service';
@@ -28,14 +28,16 @@ export class ProductDetailsComponent implements OnInit {
     private customerService: 
     CustomerService 
     ) { 
-    const id = this.route.snapshot.params['id'];
-    productService.getProductsById(id).subscribe(data => {
-      this.data = data;
-    });
-    productService.getProducts().subscribe(products => {
-        this.products = products;
-    });
-  }
+      this.route.params.subscribe((params: Params): void => {
+        const id = String(params.id);
+        productService.getProductsById(id).subscribe(data => {
+          this.data = data;
+          productService.getProducts().subscribe(products => {
+            this.products = products;
+          });
+        });
+      });
+    }
 
   ngOnInit() {
 
