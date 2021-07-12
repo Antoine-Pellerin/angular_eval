@@ -9,3 +9,11 @@
 .clear {
     clear: both;
 }
+
+.outofstock {
+    filter: grayscale(100%);
+}
+
+.cheaper {
+    color:green
+}

@@ -24,20 +24,21 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private productService: ProductService, 
-    private route: ActivatedRoute, private customerService: 
+    private route: ActivatedRoute, 
+    private customerService: 
     CustomerService 
     ) { 
     const id = this.route.snapshot.params['id'];
     productService.getProductsById(id).subscribe(data => {
       this.data = data;
+    });
     productService.getProducts().subscribe(products => {
         this.products = products;
-      });
-      this.updateTotal();
     });
   }
 
   ngOnInit() {
+
   }
 
   addToBasketClick() {
@@ -48,20 +49,14 @@ export class ProductDetailsComponent implements OnInit {
     return this.productService.isTheLast(this.data);
   }
 
-  updatePrice(event: Product): void {
-    this.customerService.addProduct(event);
-    this.productService.decreaseStock(event);
-    this.updateTotal();
-  }
-
-  updateTotal(): void {
-    this.customerService.getTotal().subscribe(total => {
-      this.total = total;
-    });
-  }
 
   isAvailable(product: Product): boolean {
     return this.productService.isAvailable(product);
+  }
+
+  addProduct(product) {
+    this.customerService.addProduct(product)
+    this.productService.decreaseStock(product)
   }
 
 }
