@@ -1,0 +1,46 @@
+<ul>
+  <li *ngFor="let product of basket">
+    {{product.title}} {{product.price | currency:'EUR'}}
+  </li>
+</ul>
+
+<pre>
+  {{customer | json}}
+</pre>
+
+<form ngForm #checkoutForm="ngForm" (submit)="checkout()">
+  <div class="form-group" [class.has-errors]="customerName.invalid">
+    <label class="control-label" for="name">Name</label>
+    <input type="text"
+           required
+           #customerName="ngModel"
+           [(ngModel)]="customer.name"
+           id="name" name="name" class="form-control">
+  </div>
+  <div class="form-group" [class.has-errors]="customerAddress.invalid">
+    <label class="control-label" for="address">Address</label>
+    <textarea id="address"
+              required
+              #customerAddress="ngModel"
+              [(ngModel)]="customer.address"
+              name="address" class="form-control">
+    </textarea>
+  </div>
+  <div class="form-group" [class.has-errors]="customerCreditCard.invalid">
+    <label class="control-label" for="creditCard">Credit card</label>
+    <input type="text"
+           required
+           pattern="^[0-9]{3}-[0-9]{3}$"
+           #customerCreditCard="ngModel"
+           [(ngModel)]="customer.creditCard"
+           id="creditCard" name="creditCard" class="form-control">
+    <span *ngIf="customerCreditCard.errors?.pattern">Invalid pattern. Example: 123-456</span>
+  </div>
+  <div>
+    <button class="btn btn-primary"
+            [disabled]="checkoutForm.invalid"
+            type="submit">
+      Checkout
+    </button>
+  </div>
+</form>
