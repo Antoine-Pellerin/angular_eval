@@ -13,6 +13,7 @@ import { BasketComponent } from './basket/basket.component';
 import {RouterModule, Routes} from '@angular/router';
 import {EmptyBasketGuard} from './empty-basket.guard';
 import {FormsModule} from '@angular/forms';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 registerLocaleData(localeFr);
 
@@ -30,6 +31,10 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'product/:id',
+    component: ProductDetailsComponent
   }
 ];
 
@@ -40,7 +45,8 @@ const routes: Routes = [
     MenuComponent,
     SortPipe,
     HomeComponent,
-    BasketComponent
+    BasketComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

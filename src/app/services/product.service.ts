@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-
 import {Product} from '../model/product';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, filter} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +26,12 @@ export class ProductService {
 
   decreaseStock(product: Product) {
     product.stock -= 1;
+  }
+
+  getProductsById(id: string): Observable<Product> {
+    return this.getProducts().pipe(
+      map(results => results.find(product => product.id === id))
+    );
   }
 
 }

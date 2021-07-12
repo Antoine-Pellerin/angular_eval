@@ -1,0 +1,27 @@
+
+  
+<section class="article">
+  <div style="float: left" class="mb"><img  width="400px" [src]="data.photo" alt=""></div>
+      
+    <div [ngClass]="{last: isTheLast()}">
+      <h1>{{data.title}}</h1>
+      <p>{{data.price | currency:'EUR'}}</p>
+      <p>{{data.stock}}</p>
+      <div *ngIf="data.stock < 2">
+      <p>DERNIER DISPONIBLE !</p>
+      </div>
+      <p>{{data.description}}</p>
+      <p>
+        <button class="btn btn-primary" (click)="addToBasketClick()">Add to Cart</button>
+      </p>
+    </div>
+  </section>
+
+  <div class="clear">
+    <ng-container *ngFor="let product of products">
+      <app-product *ngIf="isAvailable(product) && product.title != data.title" [data]="product"
+                   (addToBasket)="updatePrice($event)"></app-product>
+    </ng-container>
+  </div>
+
+  <div class="clear"></div>

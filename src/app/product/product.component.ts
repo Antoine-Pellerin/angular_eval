@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-
 import { Product } from '../model/product';
 import { ProductService } from '../services/product.service';
+
 
 @Component({
   selector: 'app-product',
@@ -17,10 +17,12 @@ export class ProductComponent implements OnInit {
   data: Product;
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
   ) {}
 
-  ngOnInit() {}
+
+  ngOnInit() {
+}
 
   addToBasketClick() {
     this.addToBasket.emit(this.data);

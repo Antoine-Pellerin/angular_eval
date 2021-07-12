@@ -6,6 +6,7 @@
       <p>{{data.description}}</p>
       <p>
         <button class="btn btn-primary" (click)="addToBasketClick()">Add to Cart</button>
+        <button class="btn tbn-primary" [routerLink]="['/product', data.id]">Plus de détail</button>
       </p>
     </div>
   </div>
