@@ -19,10 +19,11 @@
   </div>
 </section>
 
-  <div class="clear">
+
+  <div class="row text-center clear">
     <ng-container *ngFor="let product of products">
-      <app-product *ngIf="isAvailable(product) && product.title != data.title" [data]="product">
-      </app-product>
+      <app-product *ngIf="isAvailable(product) && product.title != data.title" [data]="product"
+                   (addToBasket)="updatePrice($event)"></app-product>
     </ng-container>
   </div>
 

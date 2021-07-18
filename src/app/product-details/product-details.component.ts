@@ -61,4 +61,16 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.decreaseStock(product)
   }
 
+  updatePrice(event: Product): void {
+    this.customerService.addProduct(event);
+    this.productService.decreaseStock(event);
+    this.updateTotal();
+  }
+
+  updateTotal(): void {
+    this.customerService.getTotal().subscribe(total => {
+      this.total = total;
+    });
+  }
+
 }
